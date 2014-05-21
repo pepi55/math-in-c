@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Chat</title>
+
+		<style>
+			#chat {
+				height:400px;
+				border:2px #F0F0F0 solid;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>chat app</h1>
+
+		<div id="chat"></div>
+		<form id="send-msg">
+			<input size="180" id="msg"></input>
+			<input type="submit"></input>
+		</form>
+
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+		<script>
+			jQuery(function($) {
+				var socket = io.connect();
+				var msgForm = $("#send-msg");
+				var msgBox = $("#msg");
+				var chat = $("#chat");
+
+				msgForm.submit(function(event) {
+					event.preventDefault();
+
+					socket.emit("send", msgBox.val());
+					msgBox.val("");
+				});
+
+				socket.on("new-msg", function(data) {
+					chat.append(data + "<br>");
+				});
+			});
+		</script>
+	</body>
+</html>
