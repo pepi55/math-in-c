@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #include <SDL2/SDL_image.h>
 
 #include "sdlFunc.h"
@@ -49,6 +50,28 @@ void renderTextureR (SDL_Texture *tex, SDL_Renderer *ren, int *target, int x, in
 	SDL_RenderCopyEx(ren, tex, NULL, &canv, degrees, NULL, SDL_FLIP_NONE);
 }
 
+void renderTextureRS(SDL_Texture *tex, SDL_Renderer *ren, int *target, int x, int y, int w, int h) {
+	float xdiff, ydiff, radians;
+	double degrees;
+
+	SDL_Rect canv;
+	SDL_QueryTexture(tex, NULL, NULL, &canv.w, &canv.h);
+
+	canv.x = x;
+	canv.y = y;
+	canv.w = w;
+	canv.h = h;
+
+	if (&target[0] != 0 && &target[1] != 0) {
+		xdiff = x - target[0];
+		ydiff = y - target[1];
+		radians = atan2(ydiff, xdiff);
+		degrees = (double)(radians * 180 / M_PI);
+	}
+
+	SDL_RenderCopyEx(ren, tex, NULL, &canv, degrees, NULL, SDL_FLIP_NONE);
+}
+
 void renderSprite(SDL_Texture *tex, SDL_Renderer *ren, int y, int x, SDL_Rect *clip) {
 	SDL_Rect dst;
 
@@ -71,6 +94,15 @@ void cleanUp(SDL_Window *win, SDL_Renderer *ren) {
 
 	IMG_Quit();
 	SDL_Quit();
+}
+
+int *radToDeg(int *target, float radius, float angle) {
+	int result[2];
+
+	result[0] = (int)target[0] + radius * cosf(angle);
+	result[1] = (int)target[1] + radius * sinf(angle);
+
+	return result;
 }
 
 SDL_Texture *loadBmp(char *loc, SDL_Renderer *ren) {
