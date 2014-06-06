@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #include <SDL2/SDL_image.h>
 
 #include "sdlFunc.h"
@@ -31,13 +32,35 @@ void renderTextureS(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, in
 
 void renderTextureR (SDL_Texture *tex, SDL_Renderer *ren, int *target, int x, int y) {
 	float xdiff, ydiff, radians;
-	double degrees = 0;
+	double degrees;
 
 	SDL_Rect canv;
 	SDL_QueryTexture(tex, NULL, NULL, &canv.w, &canv.h);
 
 	canv.x = x;
 	canv.y = y;
+
+	if (&target[0] != 0 && &target[1] != 0) {
+		xdiff = x - target[0];
+		ydiff = y - target[1];
+		radians = atan2(ydiff, xdiff);
+		degrees = (double)(radians * 180 / M_PI);
+	}
+
+	SDL_RenderCopyEx(ren, tex, NULL, &canv, degrees, NULL, SDL_FLIP_NONE);
+}
+
+void renderTextureRS(SDL_Texture *tex, SDL_Renderer *ren, int *target, int x, int y, int w, int h) {
+	float xdiff, ydiff, radians;
+	double degrees;
+
+	SDL_Rect canv;
+	SDL_QueryTexture(tex, NULL, NULL, &canv.w, &canv.h);
+
+	canv.x = x;
+	canv.y = y;
+	canv.w = w;
+	canv.h = h;
 
 	if (&target[0] != 0 && &target[1] != 0) {
 		xdiff = x - target[0];
