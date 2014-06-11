@@ -9,8 +9,8 @@
 int main (void) {
 	//LINE
 	int lineWidth, lineHeight, pointWidth, pointHeight;
-	int a, b, P_x, P_y;
-	int mousePos[2] = {0, 0}, target[2] = {0, 0}, target2[2] = {0, 0};
+	float a, b, P_x, P_y;
+	float mousePos[2] = {0, 0}, target[2] = {0, 0}, target2[2] = {0, 0};
 
 	P_x = WINDOW_WIDTH / 2; P_y = WINDOW_HEIGHT / 2;
 	//LINE
