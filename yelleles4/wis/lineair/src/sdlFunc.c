@@ -32,7 +32,7 @@ void renderTextureS(SDL_Texture *tex, SDL_Renderer *ren, int x, int y, int w, in
 
 void renderTextureR (SDL_Texture *tex, SDL_Renderer *ren, int *target, int x, int y) {
 	float xdiff, ydiff, radians;
-	double degrees;
+	double degrees = 0;
 
 	SDL_Rect canv;
 	SDL_QueryTexture(tex, NULL, NULL, &canv.w, &canv.h);
@@ -52,7 +52,7 @@ void renderTextureR (SDL_Texture *tex, SDL_Renderer *ren, int *target, int x, in
 
 void renderTextureRS(SDL_Texture *tex, SDL_Renderer *ren, int *target, int x, int y, int w, int h) {
 	float xdiff, ydiff, radians;
-	double degrees;
+	double degrees = 0;
 
 	SDL_Rect canv;
 	SDL_QueryTexture(tex, NULL, NULL, &canv.w, &canv.h);
