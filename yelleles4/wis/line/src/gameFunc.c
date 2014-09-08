@@ -13,7 +13,7 @@ void gameLoop (void) {
 
 	int pointWidth, pointHeight;
 	float a, b, c, y;
-	float P_x = 300, P_y = 400, Q_x = 100, Q_y = 200;
+	float P_x = 300, P_y = 400, Q_x = 600, Q_y = 100;
 
 	SDL_Event e;
 	SDL_Texture *background;
