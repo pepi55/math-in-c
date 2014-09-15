@@ -12,8 +12,10 @@ void gameLoop (void) {
 	int backgroundWidth, backgroundHeight;
 
 	int pointWidth, pointHeight;
-	float a, b, c, y;
-	float P_x = 300, P_y = 400, Q_x = 600, Q_y = 100;
+	float a, b, c, y, a2, b2, c2, y2;
+	float P_x = 300, P_y = 400, Q_x = 600, Q_y = 100,
+				P2_x = 300, P2_y = 500, Q2_x = 100, Q2_y = 50,
+				S_x = 10, S_y = 10;
 
 	SDL_Event e;
 	SDL_Texture *background;
@@ -69,8 +71,22 @@ void gameLoop (void) {
 			if (y > 0 && y < WINDOW_WIDTH) {
 				SDL_RenderDrawPoint(ren, i, y);
 			}
+
+			a2 = -(Q2_y - P2_y);
+			b2 = Q2_x - P2_x;
+			c2 = a2 * P2_x + b2 * P2_y;
+
+			y2 = (c2 - a2 * i) / b2;
+
+			if (y2 > 0 && y2 < WINDOW_WIDTH) {
+				SDL_RenderDrawPoint(ren, i, y2);
+			}
 		}
 
+		S_x = (b * c2 - b2 * c) / (a2 * b - a * b2);
+		S_y = (c * a2 - c2 * a) / (a2 * b - a * b2);
+
+		renderTexture(points, ren, S_x - pointWidth / 2, S_y - pointHeight / 2);
 		//renderTexture(points, ren, Q_x - pointWidth / 2, Q_y - pointHeight / 2);
 		//renderTexture(points, ren, P_x - pointWidth / 2, P_y - pointHeight / 2);
 
