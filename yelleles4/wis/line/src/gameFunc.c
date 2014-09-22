@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 #include "sdlFunc.h"
 #include "gameFunc.h"
@@ -12,7 +13,7 @@ void gameLoop (void) {
 	int backgroundWidth, backgroundHeight;
 
 	int pointWidth, pointHeight;
-	float a, b, c, y, a2, b2, c2, y2;
+	float a, b, c, y, a2, b2, c2, y2, xdiff, ydiff;
 	float P_x = 300, P_y = 400, Q_x = 600, Q_y = 100,
 				P2_x = 300, P2_y = 500, //Q2_x = 100, Q2_y = 50,
 				S_x = 100, S_y = 100;
@@ -65,6 +66,18 @@ void gameLoop (void) {
 			a = -(Q_y - P_y);
 			b = Q_x - P_x;
 			c = a * P_x + b * P_y;
+			y = 0;
+
+			/*xdiff = fabs(Q_y - P_y);
+			ydiff = fabs(P_x - Q_x);
+
+			if (ydiff > xdiff) {
+				y = (c - a * i) / b;
+			}
+
+			if (xdiff > ydiff) {
+				y = (c - b * i) / a;
+			}*/
 
 			y = (c - a * i) / b;
 
