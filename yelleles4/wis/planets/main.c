@@ -87,8 +87,6 @@ int main (void) {
 		}
 	}
 
-	SDL_RenderPresent(ren);
-
 	while (!quit) {
 		while (SDL_PollEvent(&e)) {
 			if (e.type == SDL_QUIT) quit = 1;
