@@ -3,8 +3,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "src/sdlFunc.h"
-#include "art/bmp.xpm"
+#include "sdlFunc.h"
+#include "../art/bmp.xpm"
 
 int main (void) {
 	int i, j, x, y, sx, sy, mx, my;
